@@ -24,7 +24,7 @@ app.get('/*', function (req, res) {
 })
 
 app.post('/buy', (req, res) => {
-    cassandra.insertPhotos(req.params.id, req.query.photo_id, req.query.url, req.query.caption, (err, response) => {
+    db.insertPhotos(req.params.id, req.query.photo_id, req.query.url, req.query.caption, (err, response) => {
         if (err) {
             res.status(501).send();
         } else {
