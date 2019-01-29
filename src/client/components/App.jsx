@@ -6,6 +6,8 @@ import "./App.css";
 import AppRouter from "./AppRouter.jsx";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {
+  Breadcrumb,
+  BreadcrumbItem,
   Container,
   Col,
   Form,
@@ -20,7 +22,7 @@ class Portpholio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      signIn: true,
+      signIn: false,
       id: ""
     };
     this.signIn = this.signIn.bind(this);
@@ -39,14 +41,14 @@ class Portpholio extends React.Component {
         <Router>
           <div>
             <nav>
-              <Row>
-                <Col xs="1">
+              <Breadcrumb>
+                <BreadcrumbItem>
                   <Link to="/">Home</Link>
-                </Col>
-                <Col xs="1">
+                </BreadcrumbItem>
+                <BreadcrumbItem>
                   <Link to="/trade/">Trade</Link>
-                </Col>
-              </Row>
+                </BreadcrumbItem>
+              </Breadcrumb>
             </nav>
             <Route
               path="/"

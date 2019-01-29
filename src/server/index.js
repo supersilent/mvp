@@ -10,11 +10,34 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 app.get('/info/', (req, res) => {
-    db.getPortpholioById(req.query.id, (err, response) => {
+    db.getPortpholio(req.query.id, (err, response) => {
         if (err) {
             res.status(501).send();
         } else {
             res.end(JSON.stringify(response));
+        }
+    });
+});
+
+app.post('/buy', (req, res) => {
+    console.log('post');
+    console.log(req.body);
+    db.BuyStock(req.body.id, req.body.symbol, req.body.price, req.body.number, (err, response) => {
+        if (err) {
+            res.status(501).send();
+        } else {
+            res.send('Created.');
+        }
+    });
+});
+
+app.post('/sell', (req, res) => {
+    console.log('sell');
+    db.SellStock(req.body._id, (err, response) => {
+        if (err) {
+            res.status(501).send();
+        } else {
+            res.send('Updated.');
         }
     });
 });
@@ -22,16 +45,6 @@ app.get('/info/', (req, res) => {
 app.get('/*', function (req, res) {
     res.redirect('/');
 })
-
-app.post('/buy', (req, res) => {
-    db.insertPhotos(req.params.id, req.query.photo_id, req.query.url, req.query.caption, (err, response) => {
-        if (err) {
-            res.status(501).send();
-        } else {
-            res.end(JSON.stringify(response));
-        }
-    });
-});
 
 app.listen(PORT, () => {
     console.log(`server listening on port, ${PORT}`);
